@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+int mod=1000000007;
 void io()
 {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
@@ -8,16 +9,22 @@ void io()
   freopen("output.txt", "w", stdout);
 #endif
 }
-int gcd(int a,int b)
+int modulo_exponential(int a,int b)
 {
-  return b==0?a:gcd(b,a%b);
+  int r=1;
+  while(b)
+  {
+    if(b&1) r=(r*a)%mod;
+    a=(a*a)%mod;
+    b=b>>1;
+  }
+  return r;
 }
 void solve()
 {
   int a,b;
-  cin>>a>>b;
-  cout<<"gcd is :"<<gcd(a,b)<<endl;
-  cout<<"LCM is :"<<(a*b)/gcd(a,b);
+  cin>>a>>b;    /* we want (a^b)%mod   */
+  cout<<modulo_exponential(a,b);
 }
 int32_t main()
 {
