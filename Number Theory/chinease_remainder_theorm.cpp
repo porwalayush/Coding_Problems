@@ -1,5 +1,7 @@
+// Linear Congruence
 #include<bits/stdc++.h>
 using namespace std;
+#define int long long
 void io()
 {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
@@ -33,7 +35,11 @@ void solve()
   int num[n],rem[n];
   for(int i=0;i<n;i++)
   {
-    cin>>num[i]>>rem[i];
+    cin>>num[i];
+  }
+  for(int i=0;i<n;i++)
+  {
+    cin>>rem[i];
   }
   int prod=1,pp[n],inv[n];
   for(int i=0;i<n;i++)
@@ -54,7 +60,7 @@ void solve()
   {
     ans=ans+((rem[i]*pp[i]*inv[i])%prod);
   }
-  cout<<ans;
+  cout<<ans%prod<<endl;
 }
 int32_t main()
 {
