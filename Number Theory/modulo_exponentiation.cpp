@@ -26,7 +26,6 @@ void solve()
   int a,b;
   cin>>a>>b;    /* we want (a^b)%mod   */
   cout<<modulo_exponential(a,b)<<endl;
-  cout<<pow(a,b);
 }
 int32_t main()
 {
