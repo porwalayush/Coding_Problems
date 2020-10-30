@@ -16,10 +16,16 @@ long f(long n) {
 	}
 }
 
-main(){
-	long n;
+int main(){
+	long t;
+	cin>>t;
+	while(t--)
+	{
 	F[0]=F[1]=1;
-	while (cin >> n)
+	long n;
+	cin>>n;
 	cout << (n==0 ? 0 : f(n-1)) << endl;
+	}
+	return 0;
 }
 // The complexity of above code is O(logn*loglogn)
