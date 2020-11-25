@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include<stdio.h>
 using namespace std;
 #define endl ("\n")
 #define ff              first
@@ -23,74 +24,51 @@ int si= 2000005;
 void io()
 {
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+     #ifndef ONLINE_JUDGE
+  freopen("input.txt", "r", stdin);
+  freopen("output.txt", "w", stdout);
+#endif
+ 
 }
-const int N=10000;
-int rnk[N+1];
-int parent[N+1];
-void init(int v)
+int dp[100][100];
+int a[1000];
+int sum(int i,int j)
 {
-  for(int i=1;i<=N;i++)
-  {
-    parent[i]=i;
-    rnk[i]=1;
-  }
-}
-int get(int n)
-{
-  if(n==parent[n])
-    return n;
-  return parent[n]=get(parent[n]);
-}
-void unite(int x,int y)
-{
-  int parent1=get(x);
-  int parent2=get(y);
-  if(parent1!=parent2)
-  {
-    if(rnk[parent1]<rnk[parent2])
+    int ans=0;
+    for(int k=i;k<=j;k++)
     {
-      parent[parent1]=parent2;
-      rnk[parent2]+=rnk[parent1];
+        ans+=a[k];
+        ans=ans%100;
     }
-    else
+    return ans;
+}
+int mixt(int start,int end)
+{
+    if(start==end)
+        return 0;
+    if(dp[start][end]!=-1)
+        return dp[start][end];
+    dp[start][end]=INT_MAX;
+    for(int k=start;k<=end;k++)
     {
-      parent[parent2]=parent1;
-      rnk[parent1]+=parent2;
+        dp[start][end]=min(dp[start][end],(mixt(start,k)+mixt(k+1,end)+(sum(start,k)*sum(k+1,end))));
     }
-  }
+    return dp[start][end];
 }
 void solve()
 {
-    int v1,e;
-    cin>>v1>>e;
-    int sh[e];
-    vector<vector<int>> v(e);
-    init(v1);
-    for(int i=0;i<e;i++)
+    int n;
+    while(cin>>n)
     {
-      int x,y,w;
-      cin>>x>>y>>w;
-      v[i]={w,x+1,y+1};
+        f(i,0,n)
+        cin>>a[i];
+        memset(dp,-1,sizeof(dp));
+        cout<<mixt(0,n-1)<<endl;
     }
-    sort(v.begin(),v.end());
-    int ans=0,pre=v[0][0];
-    for(int i=0;i<e;i++)
-    {
-      int x=v[i][1];
-      int y=v[i][2];
-      int w=v[i][0];
-      pre=0;
-      if(get(x)!=get(y))
-      {
-        unite(x,y);
-        ans=ans+w;
-      }
-    }
-    cout<<ans<<endl;
 }
 int32_t main()
 {
     io();
     solve();
     return 0;
-}
+} 
