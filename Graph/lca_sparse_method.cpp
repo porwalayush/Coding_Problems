@@ -1,5 +1,6 @@
  #include<bits/stdc++.h>
 using namespace std;
+template <typename T> void out(T t) { cout << t << endl; }
 const int N=10000,M=22;  //m=22 for 10^5 no of nodes 
 vector<int> gr[N];
 int parent[N][M];

@@ -17,10 +17,10 @@ int get(int n)
 }
 void unite(int x,int y)
 {
-	int parent1=get(x);
-	int parent2=get(y);
-	if(parent1!=parent2)
-		parent[y]=x;
+	x=get(x);
+	y=get(y);
+	if(x!=y)
+		parent[y]=x;    // can do rank optimization also
 	else
 	{
 		c++;
